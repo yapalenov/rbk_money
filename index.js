@@ -4,8 +4,13 @@ const Hitrets = require('./models.js').Hitrets;
 const Random = require('./models.js').Random;
 const Zlopamyatny = require('./models.js').Zlopamyatny;
 const Ushly = require('./models.js').Ushly;
+const Geek = require('./models.js').Geek;
 
-const dealer_types = ['Altruist', 'Kidala', 'Hitrets', 'Random', 'Zlopamyatny', 'Ushly'];
+const MY_VARIANT = false;
+
+const dealer_types = MY_VARIANT ?
+['Geek', 'Kidala', 'Hitrets', 'Random', 'Zlopamyatny', 'Ushly']
+:['Altruist', 'Kidala', 'Hitrets', 'Random', 'Zlopamyatny', 'Ushly'];
 const dealers_count = 60;
 
 let dealers = [];
@@ -43,6 +48,7 @@ function create_dealer(name, id) {
   if (name == "Random") return new Random(id, dealers_count);
   if (name == "Zlopamyatny") return new Zlopamyatny(id, dealers_count);
   if (name == "Ushly") return new Ushly(id, dealers_count);
+  if (name == "Geek") return new Geek(id, dealers_count);
 }
 function make_deal(iter) {
   let dealer_id = dealers_not_ready[Math.floor(Math.random() * dealers_not_ready.length)].id;
@@ -90,6 +96,7 @@ function types_counter_incr() {
     if (item._name == 'Random') {types_counter.Random++};
     if (item._name == 'Zlopamyatny') {types_counter.Zlopamyatny++};
     if (item._name == 'Ushly') {types_counter.Ushly++};
+    if (item._name == 'Geek') {types_counter.Geek++};
   })
 }
 function update_types_counter() {
@@ -98,13 +105,14 @@ function update_types_counter() {
   })
 }
 function iteration_result() {
-  console.log('--------------');
+  console.clear();
   console.log('Altruist: ' + types_counter.Altruist);
   console.log('Kidala: ' + types_counter.Kidala);
   console.log('Hitrets: ' + types_counter.Hitrets);
   console.log('Random: ' + types_counter.Random);
   console.log('Zlopamyatny: ' + types_counter.Zlopamyatny);
   console.log('Ushly: ' + types_counter.Ushly);
+  console.log('Geek: ' + types_counter.Geek);
 }
 function check_finish() {
   for (let prop in types_counter) {

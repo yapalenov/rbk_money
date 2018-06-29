@@ -8,6 +8,7 @@ class Dealer {
     this._oponent_lied = false;
     this._oponents_steps_counter = [];
     this._is_ready_count = 0;
+    this._false_count = 0;
     this._strategy = [true, false, true, true];
     this._kidala_strategy = '';
     let set_steps = () => {
@@ -32,6 +33,7 @@ class Dealer {
     this._is_ready_count = 0;
     this._strategy = [true, false, true, true];
     this._kidala_strategy = '';
+    this._false_count = 0;
     set_steps();
   }
 
@@ -174,6 +176,15 @@ module.exports.Ushly = class Ushly extends Dealer {
     } else {
       return this._kidala_strategy ? false : this._oponent_last_step;
     }
+  }
+}
+
+module.exports.Geek = class Geek extends Dealer {
+  constructor(id, dealers_count) {
+    super(id, "Geek", dealers_count);
+  }
+  calculate_step() {
+    return this._false_count > 550 ? true : false;
   }
 }
 
